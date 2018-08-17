@@ -1,17 +1,10 @@
 import { Navigation } from 'react-native-navigation';
 import { registerTabs } from './src/container/index';
 import { Provider } from "react-redux";
-import store from "./src/redux/store";
+import configStore from "./src/redux/store";
 
 // 执行注册页面方法
-registerTabs(store, Provider);
-
-// export default class App {
-//
-//     constructor() {
-//
-//     }
-// }
+registerTabs(configStore(), Provider);
 
 // 启动app
 Navigation.startTabBasedApp({

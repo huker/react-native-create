@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
+export default class Center extends Component {
 
-type Props = {};
-export default class Center extends Component<Props> {
+    constructor(props){
+        super(props)
+    }
 
     render() {
         return (
