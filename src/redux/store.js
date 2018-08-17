@@ -2,34 +2,34 @@
  * Created by huk on 2018/8/16.
  */
 
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import combineReducers from './reducers';
 import ApiClient from './middleware/apiClient';
 import clientMiddleware from './middleware/clientMiddleware';
 import thunk from "redux-thunk";
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import storage from 'redux-persist/es/storage';
 
 const client = new ApiClient();
 const clientMiddle = clientMiddleware(client);
 
-const finalCreateStore = compose(
-    applyMiddleware(
-        thunk,
-        clientMiddle
-    )
+//集成数据持久化
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['auth']
+};
+const persistReducer = persistCombineReducers(persistConfig, combineReducers);
+
+const createStoreWithMiddleware = applyMiddleware(
+    thunk,
+    clientMiddle
 )(createStore);
 
-export default (initialState) => {
-    console.log("initialState", initialState)
-    const store = finalCreateStore(combineReducers, initialState);
-    console.log("finalCreateStore", store)
-    return store
+const configuerStore = onComplete => {
+    let store = createStoreWithMiddleware(persistReducer);
+    let persistor = persistStore(store, null, onComplete);
+    return { persistor, store };
 };
 
-
-// import { createStore } from 'redux';
-//
-// import combineReducers from './reducers';
-//
-// const store = createStore(combineReducers);
-//
-// export default store;
+export default configuerStore;

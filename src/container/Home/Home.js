@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { login } from "../../redux/action/authAction";
 import { connect } from "react-redux";
 
 @connect(
-    (state) => ({ auth: state.auth }),
-    { login }
+    (state) => ({}),
+    {}
 )
 
 export default class Home extends Component {
@@ -14,18 +13,10 @@ export default class Home extends Component {
         super(props)
     }
 
-    handleToLogin = () => {
-        this.props.login({
-            username: 'lyfy',
-            password: '123456'
-        })
-    };
-
     render() {
-        let that = this;
         return (
             <View>
-                <TouchableOpacity onPress={this.handleToLogin}>
+                <TouchableOpacity>
                     <Text>跳转到登录页面</Text>
                 </TouchableOpacity>
             </View>

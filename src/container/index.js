@@ -8,7 +8,6 @@ import Login from "./Login/Login";
 import Loading from "./Loading/Loading";
 
 export function registerTabs(store, Provider) {
-    console.log("store, Provider", store, Provider)
     Navigation.registerComponent('home', () => Home, store, Provider);
     Navigation.registerComponent('center', () => Center, store, Provider);
     Navigation.registerComponent('login', () => Login, store, Provider);

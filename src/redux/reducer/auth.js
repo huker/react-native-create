@@ -13,7 +13,7 @@ export default function reducer(state = initState, action) {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                authInfo: action.data
+                ...action.result
             };
         case LOGIN_FAIL:
             return state;
