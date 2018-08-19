@@ -4,6 +4,7 @@
   ],
   "plugins": [
     "transform-decorators-legacy",
+    "transform-inline-environment-variables",
     [
       "import",
       {

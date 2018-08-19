@@ -2,6 +2,8 @@ import { Navigation } from 'react-native-navigation';
 import { registerTabs } from './src/container/index';
 import { Provider } from "react-redux";
 import configStore from "./src/redux/store";
+import home from "./src/assets/icon/home.png";
+import mine from "./src/assets/icon/mine.png";
 
 appRoot = 'loading';
 
@@ -35,14 +37,16 @@ function renderType() {
             Navigation.startTabBasedApp({
                 tabs: [
                     {
-                        label: 'home',
+                        label: '首页',
                         screen: 'home',
-                        title: '首页'
+                        title: '首页',
+                        icon: home
                     },
                     {
-                        label: 'center',
+                        label: '我的',
                         screen: 'center',
-                        title: '我的'
+                        title: '我的',
+                        icon: mine
                     }
                 ],
                 appStyle: {
@@ -68,4 +72,5 @@ function renderType() {
             console.log("Error")
     }
 }
+
 
