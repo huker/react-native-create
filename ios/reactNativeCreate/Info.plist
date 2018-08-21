@@ -50,6 +50,11 @@
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 			</dict>
+      <key>as.chainz.health-100.cn</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
 		</dict>
 	</dict>
 </dict>

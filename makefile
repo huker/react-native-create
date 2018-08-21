@@ -16,4 +16,7 @@ release-android:
 	cd android && ./gradlew assembleRelease
 
 release-ios:
-	@cross_env react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/bundle/main.jsbundle --assets-dest ./ios/bundle
+	@react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/bundle/main.jsbundle --assets-dest ./ios/bundle
+
+build-ios-dev:
+	@sh ./config/build-ios.sh
