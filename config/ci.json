@@ -1,0 +1,5 @@
+{
+  "NODE_ENV": "production",
+  "AS": "http://10.16.15.132",
+  "ENV": "ci"
+}

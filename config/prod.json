@@ -1,0 +1,5 @@
+{
+  "NODE_ENV": "production",
+  "AS": "http://as.chainz.health-100.cn",
+  "ENV": "prod"
+}

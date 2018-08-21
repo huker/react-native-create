@@ -4,6 +4,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import lodash from "lodash";
+import { asUrl } from "../../../config/envs";
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
@@ -35,7 +36,10 @@ export default class ApiClient {
 
                     let Public = {};
 
-                    const baseURL = process.env.API;
+                    // const baseURL = process.env.API;
+                    const baseURL = asUrl;
+
+                    console.log("baseURL",baseURL);
 
                     axios.defaults.headers.common['Authorization'] = 'bearer ' + this.token;
 

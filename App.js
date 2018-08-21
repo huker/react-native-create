@@ -9,6 +9,8 @@ appRoot = 'loading';
 
 let { store } = configStore();
 
+console.log("process.env.ENV", process.env);
+
 registerTabs(store, Provider);
 
 checkToken();
