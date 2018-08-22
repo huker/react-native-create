@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from "react-redux";
 
 @connect(
@@ -13,13 +13,42 @@ export default class Home extends Component {
         super(props)
     }
 
+    _onPressButton = () => {
+        this.props.navigator.showModal({
+            screen: 'scan',
+            title: '扫一扫'
+        })
+    };
+
     render() {
         return (
-            <View>
-                <TouchableOpacity>
-                    <Text>跳转到登录页面</Text>
+            <View style={styles.content}>
+                <TouchableOpacity onPress={this._onPressButton}>
+                    <View style={styles.scanContent}>
+                        <Text>扫一扫</Text>
+                    </View>
                 </TouchableOpacity>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    content: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    scanContent: {
+        display: "flex",
+        flexDirection: "row",
+        height: 160,
+        width: 160,
+        justifyContent: "center",
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: '#1890ff',
+        borderRadius: 80,
+        marginTop: 100
+    }
+});
