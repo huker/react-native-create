@@ -3,9 +3,11 @@
  */
 let asUrl;
 if (__DEV__) {
+    //本地地址
     asUrl = "http://10.16.15.132"
 } else {
-    asUrl = "http://as.chainz.health-100.cn"
+    //生产地址
+    asUrl = ""
 }
 
 export { asUrl }
