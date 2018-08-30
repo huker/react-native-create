@@ -7,15 +7,19 @@
 - axios
 - ant-design-mobile-rn
 
-### 路由设置，使用react-native-navigation
+### 路由 react-native-navigation
 使用的是react-native-navigation的V1版本，2我看还在开发中就没用- -
 > 配置进ios和Android项目，可以参考官方文档(https://wix.github.io/react-native-navigation/#/installation-ios)
-使用方式文档也描述的比较清楚，我写一下适应登录页面和Tabs页面切换的场景。
+使用方式文档也描述的比较清楚。
+
+1.我写一下适应登录页面和Tabs页面切换的场景
 具体代码在App.js里面，思路是:
 - 首先项目中使用了redux，并且使用redux-persist来存储我需要存的state，这儿存了'auth'
 - 存了auth的话，如果已经登录，就可以在getState()里取到auth里的token
 - 设置Navigation的方式的之前，先判断token是否存在，存在则走tabs，不存在则走single
 - 监听store的变化，检测到token有变化的话，就重新渲染nav
+
+2.在另一个项目写的时候（这边只是试手搭建的代码），想要一个screen里弹个modal，然后dismiss modal的时候把值传过来，这时候可以穿一个callback过去，然后再dismiss then之后调用
 
 ### 打包ios的ipa包
 首先要生成bundle文件，在xcode中把bundle添加项目中（加进去的时候要选上create folder references，这样bundle文件变化了也会关联到xcode中的变化），然后再archive打出生产/测试的ipa包
@@ -53,3 +57,9 @@ if (__DEV__) {
 
 export { api }
 ```
+
+### ant mobile rn碰到的问题
+
+1.使用ImagePicker组件的时候报错，找不到方法。看了下是用的react-native-camera-roll-picker，这个基于CameraRoll，所以要把CameraRoll的包加入到项目中，在node_module/react-native/Libraries/CameraRoll里
+
+2.组件的样式真的好难修改啊 有没有大佬可以提供下定制组件样式的方法
