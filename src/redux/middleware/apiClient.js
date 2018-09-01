@@ -17,7 +17,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     return response
 }, error => {
-    return Promise.resolve(error.response)
+    return Promise.reject(error.response)
 });
 
 
@@ -36,7 +36,6 @@ export default class ApiClient {
 
                     let Public = {};
 
-                    // const baseURL = process.env.API;
                     const baseURL = asUrl;
 
                     console.log("baseURL",baseURL);

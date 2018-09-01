@@ -16,10 +16,15 @@ export default function clientMiddleware(client) {
                 ...rest
             } = action;
 
-            console.log(promise)
 
             if (!action.promise) {
                 return next(action);
+            }
+
+            const _token = getState()['auth'].token;
+
+            if (_token) {
+                client.setToken(_token)
             }
 
             const [REQUEST, SUCCESS, FAILURE] = types;
@@ -48,8 +53,6 @@ export default function clientMiddleware(client) {
                     type: FAILURE
                 });
             };
-
-            console.log("client", promise(client))
 
             return promise(client).then(onFulfilled, onRejected).catch(error => {
                 console.error('MIDDLEWARE ERROR:', error);
