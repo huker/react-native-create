@@ -63,10 +63,35 @@ export { api }
 1.使用ImagePicker组件的时候报错，找不到方法。看了下是用的react-native-camera-roll-picker，这个基于CameraRoll，所以要把CameraRoll的包加入到项目中，在node_module/react-native/Libraries/CameraRoll里
 
 2.使用Popover时，想要在nav上面加一个“...”的icon，点击弹出下拉菜单这样。因为这边用了react-native-navigation，翻了下文档，是支持nav上的button自定义，并且可以传一个component进去（先在全局导航那边注册好这个component），但是这个时候onNavigatorEvent没有触发，就唤起不了popover，尝试了dismissmodal传参数一个道理，传一个callback过去，但是结果发现this指向错误，拿不到refs。
-所以暂时就只能切一张想要的大小的图，通过配置提供的icon去require，这种方式的话可以在event里监听到的。
-不然就用上面的方式，然后通过事件来触发，这样做实在繁琐了
 
+所以暂时解决是：
+方法一：
+就只能切一张想要的大小的图，通过配置提供的icon去require，这种方式的话可以在event里监听到的。
+这边要注意ref要设一下，官网的例子没说到，不加的话是取不到refs的
+```
+//nav event里
+this.refs.mc.menuContextRef.toggleMenu('morePopover')
+
+//render
+<Popover
+    ref="mc"
+    name="morePopover"
+    overlay={overlay}
+    contextStyle={styles.contextStyle}
+    overlayStyle={[
+        styles.overlayStyle,
+        Platform.OS === 'android' && styles.androidOverlayStyle,
+    ]}
+    triggerStyle={styles.triggerStyle}
+    onSelect={() => {
+        console.log("select popover option")
+    }}
+    >
+</Popover>
+```
 （然后图片的2x 3x识别，比如图片是more.png，就再放两个more@2x.png和3x的，require的时候还是引more.png）
+方法2：
+还是用component的方式，然后通过事件来触发，这样做实在繁琐了
 
 未解决：
 1.组件的样式真的好难修改啊 有没有大佬可以提供下定制组件样式的方法
