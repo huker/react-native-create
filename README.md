@@ -44,6 +44,23 @@ react-native link react-native-camera
 然后就是添加permission（就是那种第一次调用的时候会谈个框，问你允不允许app使用相机啥啥的），ios就直接在xcode的info里面手动加
 调试的时候要在真机调试，虚拟机里调用相机的话会报错
 
+### Android下react-native-camera的配置
+这边踩了好久，按照文档里给出的配置，一直报google()这个的错误，issue里也有很多朋友报了这个错，作者给出了一份配置，我这边本来gradle是3.3,然后tool是2.2.3，按文档改成了4.4和3.1.0
+出现了不同包里的buildTool产生了冲突的错误，所以需要使用support来控制
+```
+//在android/app/build.gradle中添加 统一到27.1.0
+dependencies {
+   ...
+   implementation 'com.android.support:design:27.1.0'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.0'
+    }
+}
+```
+
 ### 开发、生产环境下的api配置
 平时都是用.json文件配置好，然后通过ENV全部暴露出来，在build的时候@cross-env APP_ENV=dev之类的命令来读取配置文件，但是在react-native这边试了不行，网上说没这边只有debug和release两种场景
 就只好用这种方式来区别（有好的方式的话希望指教，我觉得这种方式不合适）
@@ -57,6 +74,10 @@ if (__DEV__) {
 
 export { api }
 ```
+
+### Android端在chrome下的调试
+项目运行起来后，commond+m可以打开开发者menu，点击debug js remotely就可以放在chrome里面调试了，但是点了之后发现连接不上
+解决方式：运行前先在chrome里打开http://localhost:8081/debugger-ui/，再跑项目里的debug remote，就可以了
 
 ### ant mobile rn碰到的问题
 
