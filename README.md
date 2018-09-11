@@ -79,6 +79,26 @@ export { api }
 项目运行起来后，commond+m可以打开开发者menu，点击debug js remotely就可以放在chrome里面调试了，但是点了之后发现连接不上
 解决方式：运行前先在chrome里打开http://localhost:8081/debugger-ui/，再跑项目里的debug remote，就可以了
 
+### 启动页
+ios:
+ios里在xcode的image.assets里面new一个launchimage，把图都添加进去，然后到general里把“launch image source”选择为你刚建的那个assets里面的launchimage，把“launch screen file”填为空，不然的话它回去读launchScreen.xib里的启动页，就成了那个默认的白色黑字的。
+
+android:
+使用了别人写好的库react-native-splash-screen v3.1.1
+配置就按照官方文档来，但是由于项目中用到了react-native-navigation，在debug环境下会有bug，启动页消失不了，在release模式下就没问题，这个查了网上都没有很好的解决办法，所以我就debug下不执行show的方法了。
+```
+//MainActivity.java中
+public class MainActivity extends SplashActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        if(!BuildConfig.DEBUG){
+            SplashScreen.show(this);
+        }
+        super.onCreate(savedInstanceState);
+    }
+}
+```
+
 ### ant mobile rn碰到的问题
 
 1.使用ImagePicker组件的时候报错，找不到方法。看了下是用的react-native-camera-roll-picker，这个基于CameraRoll，所以要把CameraRoll的包加入到项目中，在node_module/react-native/Libraries/CameraRoll里
