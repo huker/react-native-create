@@ -99,6 +99,26 @@ public class MainActivity extends SplashActivity {
 }
 ```
 
+### 长列表 flatList
+碰到的问题是onEndReached多次触发，查了网上的解决方法和自己的实践总结了下
+- 父级不要用flex:1这样去撑高度 要么给固定 要么height:'100%'这样来
+- onEndReachedThreshold在flatList中是倍数的概念 别的长列表有的是像素 我是设置的0.1 不设置到这么小在刷新的时候总是会触发2-3次（这个我也实在不明白）
+- onEndReached={() => {this.handleOnEndReached();}} bind的问题 直接写的话就是执行了
+```
+<View style={{ height: Util.size.height - 180 }}>
+                        <FlatList data={this.state.repairList}
+                                  renderItem={_renderItem}
+                                  ListFooterComponent={this._renderFooter.bind(this)}
+                                  refreshing={this.state.refreshing}
+                                  onRefresh={this.handleRefresh}
+                                  onEndReachedThreshold={0.1}
+                                  onEndReached={ () => {
+                                      this.handleOnEndReached();
+                                  }}
+                        />
+                    </View>
+```
+
 ### ant mobile rn碰到的问题
 
 1.使用ImagePicker组件的时候报错，找不到方法。看了下是用的react-native-camera-roll-picker，这个基于CameraRoll，所以要把CameraRoll的包加入到项目中，在node_module/react-native/Libraries/CameraRoll里
@@ -136,3 +156,7 @@ this.refs.mc.menuContextRef.toggleMenu('morePopover')
 
 未解决：
 1.组件的样式真的好难修改啊 有没有大佬可以提供下定制组件样式的方法
+
+----2019/03/11更新
+ant-mobile-rn 更新了新的大版本，很多问题都解决了
+这边一个疑问，还有类似更好用的rn ui组件框架么？
