@@ -119,6 +119,10 @@ public class MainActivity extends SplashActivity {
                     </View>
 ```
 
+### 一些插件
+- react-native-device-info 获取设备、包的各种信息
+  https://github.com/rebeccahughes/react-native-device-info
+
 ### ant mobile rn碰到的问题
 
 1.使用ImagePicker组件的时候报错，找不到方法。看了下是用的react-native-camera-roll-picker，这个基于CameraRoll，所以要把CameraRoll的包加入到项目中，在node_module/react-native/Libraries/CameraRoll里
@@ -160,3 +164,6 @@ this.refs.mc.menuContextRef.toggleMenu('morePopover')
 ----2019/03/11更新
 ant-mobile-rn 更新了新的大版本，很多问题都解决了
 这边一个疑问，还有类似更好用的rn ui组件框架么？
+
+----2019/5/17更新
+新写了篇热更新的 http://huker.github.io/2019/05/16/rn-hot-update/
